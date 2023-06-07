@@ -10,7 +10,7 @@ enum Direction
     None
 }
 
-public class TouchControlsHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class TouchControlsHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler //interface xu ly giao dien 
 {
     [SerializeField] private Direction btnDirection = Direction.None;
     internal static bool left;
@@ -22,9 +22,15 @@ public class TouchControlsHandler : MonoBehaviour, IPointerDownHandler, IPointer
         left = false;
         right = false;
     }
-
+    /// <summary>
+    /// IPointerUpHandler cho phep cac tap lenh goi lai khi mot con tro/cam ung duoc nhan tren phan tu giao dien nguoi dung duoc dinh kem
+    /// 
+    /// Method OnpoiterDown duoc tao de kiem tra su kien xac dinh huong duoc lien ket voi nut duoc nhan
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
+        //neu duco nhan la ben trai thi xac dinh left=true va nguoc lai
         if(btnDirection == Direction.Left)
         {
             left = true;

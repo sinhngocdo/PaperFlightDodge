@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\TouchControlsHandler.cs" />
+    <Compile Include="Assets\Scripts\EnemyCnotroller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
