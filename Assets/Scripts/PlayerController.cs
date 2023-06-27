@@ -4,14 +4,40 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 0f;
-    [SerializeField] private float rotSpeed = 0f;
+    [SerializeField] private float moveSpeed = 0f;//toc do cua nguoi choi
+    [SerializeField] private float rotSpeed = 0f;//toc do xoay cua nguoi choi
+
+    internal static bool isGameOver = false;
+
+    private void Start()
+    {
+        isGameOver = false;
+    }
 
     private void Update()
     {
-        TouchHandler();
+        if (!isGameOver)
+        {
+            TouchHandler();
 
-        PlayerReference();
+            PlayerReference();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //enemy destroyer
+            collision.gameObject.GetComponent<EnemyCnotroller>().isDestroyed = true;
+            collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            collision.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+            //Player destroyer
+            GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            isGameOver = true;
+        }
     }
 
     private void TouchHandler()
