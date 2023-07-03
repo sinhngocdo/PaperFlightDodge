@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0f;//toc do cua nguoi choi
     [SerializeField] private float rotSpeed = 0f;//toc do xoay cua nguoi choi
+    [SerializeField] private AudioSource audioSource = null;
 
     internal static bool isGameOver = false;
 
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             isGameOver = true;
+
+            audioSource.Play();
         }
     }
 
