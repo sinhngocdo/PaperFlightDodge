@@ -12,12 +12,14 @@ public class LevelManager : MonoBehaviour
 
     private int minute = 0;
     private float seconds = 0f;
+    private bool called = false;
 
     // Start is called before the first frame update
     void Start()
     {
         minute = 0;
         seconds = 0f;
+        called = false;
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class LevelManager : MonoBehaviour
             gameTimeTxt.SetText(minute.ToString().Length>1?minute.ToString():"0" + minute.ToString() + ":" + (((int)seconds).ToString().Length > 1 ? ((int)seconds).ToString() : "0" + ((int)seconds).ToString()));
 
         }
-        else
+        else if(!called)
         {
             gameOverUI.SetActive(true);
             gamePlayUI.SetActive(false);
@@ -52,6 +54,13 @@ public class LevelManager : MonoBehaviour
                 PlayerPrefs.SetInt("Minute", minute);
                 PlayerPrefs.SetInt("Seconds", (int)seconds);
             }
+            Invoke("AdsCall", 3f);
+            called = true;
         }
+    }
+
+    private void AdsCall()
+    {
+        AdsManager.instance.ShowAd(); 
     }
 }
